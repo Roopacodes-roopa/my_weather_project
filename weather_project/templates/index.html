@@ -1,0 +1,189 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Weather App</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="sky">
+    <div class="sun"></div>
+
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+</div>
+
+    <!-- Heading -->
+
+    <h1>
+        <i class="fa-solid fa-cloud-sun"></i>
+        Smart Weather + AQI App
+    </h1>
+
+    <!-- Search Form -->
+
+    <form method="POST" class="search-box">
+
+        <input type="text"
+        name="city"
+        placeholder="Enter city name...">
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+        </button>
+
+    </form>
+
+    <!-- Error -->
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- Weather Cards -->
+
+    {% for c in data %}
+
+   <div class="card">
+
+    <h2>{{ c.city }}</h2>
+
+    <!-- Weather Emoji -->
+
+    <div class="weather-icon">
+
+        {% if 'rain' in c.desc.lower() %}
+            🌧
+
+        {% elif 'cloud' in c.desc.lower() %}
+            ☁
+
+        {% elif 'clear' in c.desc.lower() %}
+            ☀
+
+        {% else %}
+            🌤
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Temperature FIRST -->
+
+    <h2 class="temp">
+        {{ c.temp }}°C
+    </h2>
+
+    <p>{{ c.desc }}</p>
+
+
+    <!--  Details -->
+
+    <div class="weather-details">
+
+        <div class="detail-box">
+
+            <div class="detail-emoji">
+                💧
+            </div>
+
+            <h3>Humidity</h3>
+
+            <p>{{ c.humidity }}%</p>
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <div class="detail-emoji">
+                🌬
+            </div>
+
+            <h3>Wind</h3>
+
+            <p>{{ c.wind }}</p>
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <div class="detail-emoji">
+                👕
+            </div>
+
+            <h3>Outfit</h3>
+
+            <p>{{ c.outfit }}</p>
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <div class="detail-emoji">
+                ☀
+            </div>
+
+            <h3>UV Index</h3>
+
+            <p>{{ c.uv }}</p>
+
+        </div>
+
+    </div>
+      <!-- AQI -->
+
+        <div class="aqi-box">
+
+            <h3>
+                🌫 AQI : {{ c.aqi }}
+            </h3>
+
+            <p>
+                {{ c.status }}
+            </p>
+
+            <p>
+                {{ c.health }}
+            </p>
+
+        </div>
+
+        <!-- Extra Information -->
+
+        <div class="extra-info">
+
+            <p>
+                 {{ c.time }}
+            </p>
+
+            <p>
+                 {{ c.travel }}
+            </p>
+
+            <p>
+                 {{ c.season }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #a8cc07,
+        #3c70c9,
+        #4facfe,
+        #520a58
+    );
+
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+
+    padding: 30px;
+}
+
+/* BACKGROUND ANIMATION */
+@keyframes gradientBG {
+    0% { background-position: 0% 30%; }
+    50% { background-position: 100% 40%; }
+    100% { background-position: 0% 40%; }
+}
+
+/* HEADING */
+h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 10px;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+/* SEARCH BOX */
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+/* INPUT */
+input {
+    padding: 20px;
+    width: 500px;
+
+    border: none;
+    outline: none;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: #000;
+
+    font-size: 22px;
+}
+
+input::placeholder {
+    color: #666;
+}
+
+/* BUTTON */
+button {
+    padding: 18px 20px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #222;
+    color: #fff;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    background: #444;
+}
+
+/* WEATHER CARD */
+.card {
+    margin-top: 25px;
+
+    width: 100%;
+    max-width: 1000px;
+
+    padding: 30px;
+    border-radius: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd;
+
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+
+    color: #000;
+
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* TEXT */
+.card h2 {
+    font-size: 80px;
+    margin: 15px 0;
+}
+
+.card p {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+/* AQI COLORS */
+.aqi-1 { color: #00aa55; font-weight: bold; }
+.aqi-2 { color: #66cc00; font-weight: bold; }
+.aqi-3 { color: orange; font-weight: bold; }
+.aqi-4 { color: red; font-weight: bold; }
+.aqi-5 { color: darkred; font-weight: bold; }
+
+/* DETAILS GRID */
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* BOX */
+.detail-box {
+    background: #f2f2f2;
+    padding: 15px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.detail-box:hover {
+    background: #e0e0e0;
+    transform: scale(1.05);
+}
+
+/* EMOJI */
+.detail-emoji {
+    font-size: 60px;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+    h1 { font-size: 30px; }
+
+    .card { width: 95%; }
+
+    input {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 90%;
+    }
+}
+
+/* Sky Layer */
+
+.sky{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Sun */
+
+.sun{
+    position: absolute;
+    top: 50px;
+    right: 80px;
+
+    width: 140px;
+    height: 140px;
+
+    background: #ffd54f;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 40px #ffd54f,
+        0 0 80px #ffd54f,
+        0 0 120px #ffd54f;
+}
+
+/* Clouds */
+
+.cloud{
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+
+    width: 180px;
+    height: 60px;
+
+    border-radius: 50px;
+}
+
+/* Cloud Shape */
+
+.cloud::before,
+.cloud::after{
+    content: "";
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+}
+
+.cloud::before{
+    width: 70px;
+    height: 70px;
+    top: -30px;
+    left: 25px;
+}
+
+.cloud::after{
+    width: 90px;
+    height: 90px;
+    top: -45px;
+    right: 20px;
+}
+
+/* Positions */
+
+.cloud1{
+    top: 120px;
+    left: -250px;
+    animation: moveCloud 35s linear infinite;
+}
+
+.cloud2{
+    top: 280px;
+    left: -300px;
+    transform: scale(0.8);
+    animation: moveCloud 45s linear infinite;
+}
+
+.cloud3{
+    top: 450px;
+    left: -200px;
+    transform: scale(1.2);
+    animation: moveCloud 55s linear infinite;
+}
+
+/* Animation */
+
+@keyframes moveCloud{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(140vw);
+    }
+}
